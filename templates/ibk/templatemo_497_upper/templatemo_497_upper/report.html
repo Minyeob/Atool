@@ -1,0 +1,696 @@
+<title>Atools</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+</head>
+
+<style type="text/css">
+   body{
+   height:100%;
+   padding:5px;
+   }
+
+
+   pre {
+    white-space: pre-wrap; /* CSS3*/
+    white-space: -moz-pre-wrap; /* Mozilla, since 1999 */
+    white-space: -pre-wrap; /* Opera 4-6 */
+    white-space: -o-pre-wrap; /* Opera 7 */
+    word-wrap: break-all; /* Internet Explorer 5.5+ */
+   }
+
+   #table1{
+   float:left;
+   table-layout:fixed;
+   padding-right:10px;
+   }
+
+   #table2{
+   float:left;
+   width:50%;
+   padding-bottom:20px;
+   }
+
+   #table3{
+   clear:both;
+   table-layout:fixed;
+   padding-top: 10px;
+   }
+
+   #table7{
+   float:left;
+   table-layout:fixed;
+   padding-right:10px;
+   }
+
+   #table8{
+   float:left;
+   width:50%;
+   }
+
+   #table9{
+   clear:both;
+   padding-bottom:20px;
+   }
+
+   #submit{
+    float: right;
+    padding-right: 550px;
+
+ 
+   }
+</style>
+
+<body>
+
+<form action="{% url 'ibk:download' %}" accept-charset="utf-8" method="post">
+{% csrf_token %}
+<div id="table1">
+<table border="1">
+<h6>결과요약</h6>
+<tr align="center" >
+    <td>Program</td>
+    <td><input type="text" name="program" value="{{ program }}"></td>
+    <td>OPB</td>
+    <td><input type="text" name="opb" value="{{opb}}"></td>
+    <td rowspan="5">법사가 대비</td>
+    <td rowspan="5">시장가 대비</td>
+    <td rowspan="5">OPB 대비</td>
+</tr>
+<tr align="center">
+    <td>담당자</td>
+
+    <td><input type="text" size="10" name="user"></td>
+    <td>연체이자</td>
+    <td><input type="text" name="interest" value="{{interest}}"></td>
+</tr>
+<tr align="center">
+    <td>담당자 연락처</td>
+    <td><input type="text" size="10" name="user_phone"></td>
+    <td>총 채권액</td>
+    <td><input type="text" size="10" name="credit_amount"></td>
+</tr>
+<tr align="center">
+    <td>Property Control NO.</td>
+    <td><input type="text" name="property_control_no" value="{{property_control_no}}"></td>
+    <td>설정액</td>
+    <td><input type="text" name="setup_price" value="{{setup_price}}"></td>
+</tr>
+<tr align="center">
+    <td>Borrow Name</td>
+    <td><input type="text" name="borrow_name" value="{{borrow_name}}"></td>
+    <td>법사가</td>
+    <td><input type="text" size="10" name="law_price"></td>
+</tr>
+<tr align="center">
+    <td>시장전망</td>
+    <td><input type="text" size="10" name="market_predict"></td>
+    <td >시장가</td>
+    <td><input type="text" size="10" name="market_price"></td>
+    <td><input type="text" size="10" name="law_price_comp1"></td>
+    <td><input type="text" size="10" name="market_price_comp1"></td>
+    <td><input type="text" size="10" name="opb_comp1"></td>
+</tr>
+<tr align="center">
+    <td>관할법원</td>
+    <td><input type="text" name="court" value="{{court}}"></td>
+    <td>낙찰가</td>
+    <td><input type="text" size="10" name="bid"></td>
+    <td><input type="text" size="10" name="law_price_comp2"></td>
+    <td><input type="text" size="10" name="market_price_comp2"></td>
+    <td><input type="text" size="10" name="opb_comp2"></td>
+</tr>
+<tr align="center">
+    <td>사건번호</td>
+    <td><input type="text" name="case" value="{{case}}"></td>
+    <td>평균낙찰가</td>
+    <td><input type="text" size="10" name="avg_bid"></td>
+    <td><input type="text" size="10" name="law_price_comp3"></td>
+    <td><input type="text" size="10" name="market_price_comp3"></td>
+    <td><input type="text" size="10" name="opb_comp3"></td>
+</tr>
+<tr align="center">
+    <td>법원제출일</td>
+    <td><input type="date" size="10" name="submission_date"></td>
+    <td>차기기일</td>
+    <td><input type="date" size="10" name="next_date"></td>
+    <td >유찰회수</td>
+    <td colspan="2"><input type="text" size="10" name="fail_count"></td>
+</tr>
+</table>
+</div>
+
+<div id="table2">
+<table border="1">
+<h6>본건현황</h6>
+<tr align="center">
+    <td colspan="7">Address</td>
+    <td colspan="2">Property Category</td>
+</tr>
+<tr align="center">
+    <td colspan="7"><input type="text" name="address" value="{{address}}"></td>
+    <td colspan="2"><input type="text" name="property_category" value="{{category}}"></td>
+</tr>
+
+<tr align="center">
+    <td colspan="9">토지</td>
+ </tr>
+
+<tr align="center">
+    <td>용도지역</td>
+    <td>지목</td>
+      <td><input type="text" size="10" name="urlfor_lnd_info" value="{{urlfor_lnd_info }}"></td>
+    <td>이용상황</td>
+    <td colspan="2">개별공시지가</td>
+    <td colspan="2">전체 토지 면적</td>
+
+    <td colspan="2">담보(대지권)면적</td>
+</tr>
+
+
+<tr align="center">
+    <td><input type="text" size="10" name="usage"></td>
+    <td><input type="text" size="10" name="land_category"></td>
+    <td><input type="text" size="10" name="state"></td>
+    <td><input type="text" size="10" name="land_price_m"></td>
+    <td><input type="text" size="10" name="land_price_py"></td>
+    <td><input type="text" size="10" name="urlfor_lnd_area" value="{{urlfor_lnd_area }}"></td>
+    <td><input type="text" size="10" name="land_size_py"></td>
+    <td><input type="text" size="10" name="security_size_m"></td>
+    <td><input type="text" size="10" name="security_size_py"></td>
+</tr>
+
+<tr align="center">
+    <td colspan="9">건물</td>
+ </tr>
+
+ <tr align="center">
+    <td >건물구조</td>
+     <td><input type="text" size="10" name="urlfor_lnd_crt" value="{{urlfor_lnd_crt }}"></td>
+    <td>사용승인일</td>
+     <td><input type="text" size="10" name="urlfor_lnd_date" value="{{urlfor_lnd_date }}"></td>
+    <td>층별 용도</td>
+     <td><input type="text" size="10" name="urlfor_lnd_mainPurps" value="{{urlfor_lnd_mainPurps }}"></td>
+    <td colspan="2">전용율</td>
+    <td colspan="2">담보면적(전유)</td>
+    <td colspan="2">담보면적(계약)</td>
+</tr>
+
+<tr align="center">
+    <td><input type="text" size="10" name="structure"></td>
+    <td><input type="text" size="10" name="permission_date"></td>
+    <td><input type="text" size="10" name="floor_usage"></td>
+    <td colspan="2"><input type="text" size="10" name="exclusive_rate"></td>
+    <td><input type="text" size="10" name="exclusive_area_m"></td>
+    <td><input type="text" size="10" name="exclusive_area_py"></td>
+    <td><input type="text" size="10" name="contract_area_m"></td>
+    <td><input type="text" size="10" name="contract_area_py"></td>
+</tr>
+</table>
+</div>
+
+<div id="table3">
+<table border="1">
+<h6>1.건물</h6>
+<tr align="center">
+    <td rowspan="2">기호</td>
+    <td rowspan="2">호</td>
+    <td colspan="7">면적</td>
+    <td colspan="4">Auction value(A)</td>
+    <td colspan="4">Market value(M)</td>
+    <td colspan="5">Estimated Value(E)</td>
+</tr>
+
+<tr align="center">
+    <td>전유(m2)</td>
+    <td>전유(py)</td>
+    <td>계약(m2)</td>
+    <td>계약(py)</td>
+    <td>대지권(m2)</td>
+    <td>대지권(py)</td>
+    <td>전용율</td>
+    <td>금액(원)</td>
+    <td>전유단가(py)</td>
+    
+    <td>계약단가(py)</td>
+    <td>가구비</td>
+    <td>금액원(원)</td>
+    <td>전유단가(py)</td>
+    <td>계약단가(py)</td>
+    <td>M/A</td>
+    <td>금액원(원)</td>
+    <td>전유단가(py)</td>
+    <td>계약단가(py)</td>
+    <td>E/A</td>
+    <td>E/M</td>
+</tr>
+
+{% for label, ho, liensize_improvement, landsize in building %}
+<tr align="center">
+    <td><input type="text" name="building_label[]" value="{{label}}"></td>
+    <td><input type="text" name="building_ho[]" value="{{ho}}"></td>
+    <td><input type="text" name="building_exclusive_m[]" value="{{liensize_improvement}}"></td>
+    <td><input type="text" size="5" name="building_exclusive_py[]" value="0"></td>
+    <td><input type="text" name="building_contract_m[]" value="0"></td>
+    <td><input type="text" size="5" name="building_contract_py[]" value="0"></td>
+    <td><input type="text" name="building_right_m[]" value="{{ landsize }}"></td>
+    <td><input type="text" size="5" name="building_right_py[]" value="0"></td>
+    <td><input type="text" size="5" name="building_ratio[]"></td>
+    <td><input type="text" size="5" name="building_auction_price[]"></td>
+    <td><input type="text" size="5" name="building_auction_exclusive[]"></td>
+    <td><input type="text" size="5" name="building_auction_contract[]"></td>
+    <td><input type="text" size="5" name="building_auction_ratio[]"></td>
+    <td><input type="text" size="5" name="building_market_price[]"></td>
+    <td><input type="text" size="5" name="building_market_exclusive[]"></td>
+    <td><input type="text" size="5" name="building_market_contract[]"></td>
+    <td><input type="text" size="5" name="building_market_ma[]"></td>
+    <td><input type="text" size="5" name="building_estimated_price[]"></td>
+    <td><input type="text" size="5" name="building_estimated_exclusive[]"></td>
+    <td><input type="text" size="5" name="building_estimated_contract[]"></td>
+    <td><input type="text" size="5" name="building_estimated_ea[]"></td>
+    <td><input type="text" size="5" name="building_estimated_em[]"></td>
+</tr>
+{% endfor %}
+<tr align="center">
+<td>소계</td>
+<td><input type="text" size="5" name="호(호 개수 합친거)"></td>
+<td><input type="text" size="5" name="전유(m2)(전유m2 합친거)"></td>
+<td><input type="text" size="5" name="전유(py)(전유py 합친거)"></td>
+<td><input type="text" size="5" name="계약(m2)(계약m2 합친거)"></td>
+<td><input type="text" size="5" name="계약(py)(계약py 합친거)"></td>
+<td><input type="text" size="5" name="대지권(대지권 합친거)"></td>
+<td><input type="text" size="5" name="대지권(py)(대지권py 합친거)"></td>
+<td><input type="text" size="5" name="전용율(전유m2합친거/계약m2합친거)"></td>
+<td><input type="text" size="5" name="금액(원)(A)합친거"></td>
+<td><input type="text" size="5" name="전유단가(py)(A)Round1"></td>
+<td><input type="text" size="5" name="계약단가(py)(A)Round2"></td>
+<td><input type="text" size="5" name="가구비----"></td>
+<td><input type="text" size="5" name="금액(원)(M)합친거"></td>
+<td><input type="text" size="5" name="전유단가(py)(M)Round3"></td>
+<td><input type="text" size="5" name="계약단가(py)(M)Round4"></td>
+<td><input type="text" size="5" name="M/A----"></td>
+<td><input type="text" size="5" name="금액(원)(E)합친거"></td>
+<td><input type="text" size="5" name="전유단가(py)(E)Round5"></td>
+<td><input type="text" size="5" name="계약단가(py)(E)Round6"></td>
+<td><input type="text" size="5" name="E/A----"></td>
+<td><input type="text" size="5" name="E/M----"></td>
+</tr>
+</table>
+</div>
+
+
+<div id="table4">
+<table border="1">
+<h6>2.제시외건물,기계기구</h6>
+ <tr align="center">
+    <td rowspan="2">기호</td>
+    <td rowspan="2">구분</td>
+    <td rowspan="2">호</td>
+    <td rowspan="2">구조/명칭</td>
+    <td rowspan="2">용도/취득일자</td>
+    <td colspan="2">면적 or 수량</td>
+    <td colspan="4">Auction Value(A)</td>
+    <td colspan="4">Market Value(M)</td>
+    <td colspan="5">Estimated Value(E)</td>
+</tr>
+    
+<tr align="center">
+    <td>m2</td>
+    <td>py</td>
+    <td>금액(원)</td>
+    <td>단가(m2)</td>
+    <td>단가(py)</td>
+    <td>가구비</td>
+    <td>금액(원)</td>
+    <td>단가(m2)</td>
+    <td>단가(py)</td>
+    <td>M/A</td>
+    <td>금액(원)</td>
+    <td>단가(m2)</td>
+    <td>단가(py)</td>
+    <td>E/A</td>
+    <td>E/M</td>
+</tr>
+
+<tr align="center">
+    <td>ㄱ</td>
+    <td>제시외</td>
+    <td><input type="text" size="5" name="호"></td>
+    <td><input type="text" size="5" name="구조/명칭"></td>
+    <td><input type="text" size="5" name="용도/취득일자"></td>
+    <td><input type="text" size="5" name="m2"></td>
+    <td><input type="text" size="5" name="py"></td>
+    <td><input type="text" size="5" name="금액(원)(A)"></td>
+    <td><input type="text" size="5" name="단가(m2)(A)"></td>
+    <td><input type="text" size="5" name="단가(py)(A)"></td>
+    <td><input type="text" size="5" name="가구비"></td>
+    <td><input type="text" size="5" name="금액(원)(M)"></td>
+    <td><input type="text" size="5" name="단가(m2)(M)"></td>
+    <td><input type="text" size="5" name="단가(py)(M)"></td>
+    <td><input type="text" size="5" name="M/A"></td>
+    <td><input type="text" size="5" name="금액(원)(E)"></td>
+    <td><input type="text" size="5" name="단가(m2)(E)"></td>
+    <td><input type="text" size="5" name="단가(py)(E)"></td>
+    <td><input type="text" size="5" name="E/A"></td>
+    <td><input type="text" size="5" name="E/M"></td>
+</tr>
+
+<tr align="center">
+    <td>1</td>
+    <td><input type="text" name="기계" placeholder="{{utensil}}"></td>
+    <td><input type="text" size="5" name="호"></td>
+    <td><input type="text" size="5" name="구조/명칭"></td>
+    <td><input type="text" size="5" name="용도/취득일자"></td>
+    <td><input type="text" size="5" name="m2"></td>
+    <td><input type="text" size="5" name="py"></td>
+    <td><input type="text" size="5" name="금액(원)(A)"></td>
+    <td><input type="text" size="5" name="단가(m2)(A)"></td>
+    <td><input type="text" size="5" name="단가(py)(A)"></td>
+    <td><input type="text" size="5" name="가구비"></td>
+    <td><input type="text" size="5" name="금액(원)(M)"></td>
+    <td><input type="text" size="5" name="단가(m2)(M)"></td>
+    <td><input type="text" size="5" name="단가(py)(M)"></td>
+    <td><input type="text" size="5" name="M/A"></td>
+    <td><input type="text" size="5" name="금액(원)(E)"></td>
+    <td><input type="text" size="5" name="단가(m2)(E)"></td>
+    <td><input type="text" size="5" name="단가(py)(E)"></td>
+    <td><input type="text" size="5" name="E/A"></td>
+    <td><input type="text" size="5" name="E/M"></td>
+</tr>
+
+<tr align="center">
+    <td colspan="7">소계</td>
+    <td><input type="text" size="5" name="금액(원)(A)"></td>
+    <td><input type="text" size="5" name="단가(m2)(A)"></td>
+    <td><input type="text" size="5" name="단가(py)(A)"></td>
+    <td><input type="text" size="5" name="가구비"></td>
+    <td><input type="text" size="5" name="금액(원)(M)"></td>
+    <td><input type="text" size="5" name="단가(m2)(M)"></td>
+    <td><input type="text" size="5" name="단가(py)(M)"></td>
+    <td><input type="text" size="5" name="M/A"></td>
+    <td><input type="text" size="5" name="금액(원)(E)"></td>
+    <td><input type="text" size="5" name="단가(m2)(E)"></td>
+    <td><input type="text" size="5" name="단가(py)(E)"></td>
+    <td><input type="text" size="5" name="E/A"></td>
+    <td><input type="text" size="5" name="E/M"></td>
+</tr>
+</table>
+</div>
+
+
+<div id="table5">
+<table border="1">
+<h6>3.합계</h6>
+<tr align="center">
+    <td colspan="7">평가총액</td>
+    <td><input type="text" size="10" name="AL26+AL34"></td>
+    <td><input type="text" size="10" name="Round7"></td>
+    <td><input type="text" size="10" name="Round8"></td>
+    <td><input type="text" size="10" name="AL37/AL37"></td>
+    <td><input type="text" size="10" name="BH26+BH34"></td>
+    <td><input type="text" size="10" name="Round9"></td>
+    <td><input type="text" size="10" name="Round10"></td>
+    <td><input type="text" size="10" name="BH37/AL37"></td>
+    <td><input type="text" size="10" name="CD26+CD34"></td>
+    <td><input type="text" size="10" name="Round11"></td>
+    <td><input type="text" size="10" name="Round12"></td>
+    <td><input type="text" size="10" name="CD/37/AL37"></td>
+    <td><input type="text" size="10" name="CD37/BH37"></td>
+</tr>
+</table>
+</div>
+
+
+<div id="table6">
+<table border="1">
+<h6>인근거래사례 및 낙찰사례</h6>
+<tr align="center">
+    <td rowspan="2">구분</td>
+    <td>소재지</td>
+    <td>층</td>
+    <td>구조</td>
+    <td>사용승인일</td>
+    <td>유찰회수</td>
+    <td>기준시점</td>
+    <td>전유면적(m2)</td>
+    <td>계약면적(m2)</td>
+    <td>대지권(m2)</td>
+    <td colspan="3">법사가</td>
+    <td colspan="3">거래가 or 낙찰가</td>
+    <td>차순위 낙찰가</td>
+    <td>전용율</td>
+</tr>
+
+<tr align="center">
+    <td>지번</td>
+    <td>호</td>
+    <td>용도</td>
+    <td>산건번호</td>
+    <td>입찰자수</td>
+    <td>거래일(낙찰일)</td>
+    <td>전유면적(py)</td>
+    <td>계약면적(py)</td>
+    <td>대지권(py)</td>
+    <td>금액(원)</td>
+    <td>전유단가(py)</td>
+    <td>계약단가(py)</td>
+    <td>금액(원)</td>
+    <td>전유단가(py)</td>
+    <td>계약단가(py)</td>
+    <td>낙찰자</td>
+    <td>낙찰가율</td>
+</tr>
+
+<tr align="center">
+    <td rowspan="2">거래</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="text" name="대지권(m2)"></td>
+    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr align="center">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="text" name="대지권(py)"></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr align="center">
+    <td rowspan="2">거래</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="text" name="대지권(m2)"></td>
+    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2">&nbsp;</td>
+    <td rowspan="2">&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr align="center">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td><input type="text" name="대지권(py)"></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+
+<
+</table>   
+</div>
+
+
+<div id="table7">
+<table border="1">
+<h6>본건 거래사례, 낙찰사례, 유찰사례, 평가전례</h6>
+<tr align="center">
+    <td>구분</td>
+    <td>기준시점</td>
+    <td>매도인</td>
+    <td>매수인(낙찰자)</td>
+    <td>금액</td>
+    <td>계약단가(py)</td>
+    <td>비고(사건번호)</td>
+</tr>
+
+<tr align="center">
+    <td>
+    <select name="구분">
+      
+     <option value="거래">거래</option>
+     <option value="경매">경매</option>
+     <option value="낙찰">낙찰</option>
+     <option value="유찰">유찰</option>
+     <option value="담보">담보</option>
+     <option value="재평가">재평가</option>
+     <option value="기타">기타</option>   
+    </select>
+    </td>
+    <td><input type="date" size="10" name="기준시점"></td>
+    <td><input type="text" size="10" name="매도인"></td>
+    <td><input type="text" size="10" name="매수인(낙찰자)"></td>
+    <td><input type="text" size="10" name="금액"></td>
+    <td><input type="text" size="10" name="계약단가(py)"></td>
+    <td><input type="text" size="10" name="비고(사건번호)"></td>
+</tr>
+
+<tr align="center">
+    <td>
+    <select name="구분">
+      
+     <option value="거래">거래</option>
+     <option value="경매">경매</option>
+     <option value="낙찰">낙찰</option>
+     <option value="유찰">유찰</option>
+     <option value="담보">담보</option>
+     <option value="재평가">재평가</option>
+     <option value="기타">기타</option>   
+    </select>
+    </td>
+    <td><input type="date" size="10" name="기준시점"></td>
+    <td><input type="text" size="10" name="매도인"></td>
+    <td><input type="text" size="10" name="매수인(낙찰자)"></td>
+    <td><input type="text" size="10" name="금액"></td>
+    <td><input type="text" size="10" name="계약단가(py)"></td>
+    <td><input type="text" size="10" name="비고(사건번호)"></td>
+</tr>
+
+<tr align="center">
+    <td>
+    <select name="구분">
+     
+     <option value="거래">거래</option>
+     <option value="경매">경매</option>
+     <option value="낙찰">낙찰</option>
+     <option value="유찰">유찰</option>
+     <option value="담보">담보</option>
+     <option value="재평가">재평가</option>
+     <option value="기타">기타</option>   
+    </select>
+    </td>
+    <td><input type="date" size="10" name="기준시점"></td>
+    <td><input type="text" size="10" name="매도인"></td>
+    <td><input type="text" size="10" name="매수인(낙찰자)"></td>
+    <td><input type="text" size="10" name="금액"></td>
+    <td><input type="text" size="10" name="계약단가(py)"></td>
+    <td><input type="text" size="10" name="비고(사건번호)"></td>
+</tr>
+</table>
+</div>
+
+<div id="table8">
+<table border="1">
+<h6>종합의견</h6>
+<tr align="center">
+    <td>법사가 분석</td>
+    <td colspan="3"><textarea cols="60"></textarea></td>
+</tr>
+
+<tr align="center">
+    <td>시장전망</td>
+    <td colspan="3"><textarea cols="60"></textarea></td>
+</tr>
+
+<tr align="center">
+    <td>가격 수준</td>
+    <td><textarea cols="25"></textarea></td>
+    <td>임대수준</td>
+    <td><textarea cols="25"></textarea></td>
+</tr>
+
+<tr align="center">
+    <td>가격결정의견</td>
+    <td colspan="3"><textarea cols="60"></textarea></td>
+ </tr>
+
+
+</table>
+</div>
+
+<div id="table9">
+<table border="1">
+<h6>낙찰가율 통계</h6>
+<tr align="center">
+    <td>분류</td>
+    <td>지역</td>
+    <td>낙찰가율(1년)</td>
+    <td>낙찰건수</td>
+    <td>낙찰가율(6월)</td>
+    <td>낙찰건수</td>
+    <td>낙찰가율(3월)</td>
+    <td>낙찰건수</td>
+</tr>
+
+<tr align="center">
+    <td rowspan="3"><input type="text" name="주거분류" placeholder="{{category}}"></td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr align="center">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+
+<tr align="center">
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+</tr>
+</table>
+</div>
+<div id="submit">
+    <input type="submit" value="완료" name="완료" style="height: 30px; width: 100px;" >
+</div>
+</form>
+</body>

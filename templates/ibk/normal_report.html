@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ normal_report }}</title>
+</head>
+<body>
+    <h4>Program : {{ program }}</h4>
+    <h4>{{ code }}</h4>
+    <h4>Borrow Name : {{ borrow_name }}</h4>
+    <h4>Property Control NO : {{ property_control_no }}</h4>
+    <h4>관할법원 : {{ court }}</h4>
+    <h4>사건번호 : {{ case }}</h4>
+    <h4>OPB : {{ opb }}</h4>
+    <h4>연체이자 : {{ interest }}</h4>
+    <h4>설정액 : {{ setup_price }}</h4>
+    <input type="text" id="address" placeholder="{{ address }}" size="100">
+    <h4>Property Category:{{ category }}</h4>
+    {% for h in ho %}
+        <h4>호 : {{ h }}</h4>
+    {% endfor %}
+    {% for size in liensize_improvement %}
+        <h4>전유면적 : {{ size }}</h4>
+    {% endfor %}
+    {% for land in landsize %}
+        <h4>대지권 : {{ land }}</h4>
+    {% endfor %}
+    <h4>기계숫자 : {{ utensil }}</h4>
+    <h4>법정동코드 {{ address_code }}</h4>
+    <h4>데이터 : {{ data }}</h4>
+    <input type="text" id="bcode">
+    {% if building %}
+        <h3>building</h3>
+        {% for a,b,c in building %}
+            {{ a }}{{ b }}{{ c }}
+        {% endfor %}
+    {% endif %}
+
+<script src="http://dmaps.daum.net/map_js_init/postcode.v2.js?autoload=false"></script>
+<script>
+      daum.postcode.load(function() {
+          new daum.Postcode({
+              oncomplete: function (data) {
+                  document.getElementById('bcode').value = data.bcode; //5자리 새우편번호 사용
+              },
+              theme: {
+                searchBgColor: "#15ECA0", //검색창 배경색
+                queryTextColor: "#FFFFFF", //검색창 글자색
+                emphTextColor: "#D81DB7" //강조 글자색
+                },
+              onclose: function(state) {
+        //state는 우편번호 찾기 화면이 어떻게 닫혔는지에 대한 상태 변수 이며, 상세 설명은 아래 목록에서 확인하실 수 있습니다.
+        if(state === 'FORCE_CLOSE'){
+            //사용자가 브라우저 닫기 버튼을 통해 팝업창을 닫았을 경우, 실행될 코드를 작성하는 부분입니다.
+
+
+        } else if(state === 'COMPLETE_CLOSE'){
+            //사용자가 검색결과를 선택하여 팝업창이 닫혔을 경우, 실행될 코드를 작성하는 부분입니다.
+            //oncomplete 콜백 함수가 실행 완료된 후에 실행됩니다.
+             $.ajax({
+                 url: "upload/",
+                 success : function(json) {
+                 $("#request-access").hide();
+                 console.log("requested access complete");
+                }
+                })
+        }}
+          }).open({q: document.getElementById('address').getAttribute("placeholder"), autoclose: true,
+                    popupName: 'postcodePopup' });
+    });
+</script>
+</body>
+</html>

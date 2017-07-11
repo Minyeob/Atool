@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>File Upload</title>
+</head>
+<body>
+
+    {% load staticfiles %}
+    <div class="panel-heading" style="background-image: url('{% static "img/tm-bg-4.jpeg" %}')">
+        <h3 class="panel-title">{{ file.title }}</h3>
+
+        {% if normals %}
+            <h3>탁감</h3>
+            <ul>
+            {% for normal_data, normal_code in normals %}
+                <li><a href="/ibk/page/{{ normal_code }}?title={{ file.title }}">{{ normal_data }}</a></li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <p>No document</p>
+        {% endif %}
+        {% for a in normals %}
+            {{ a.0 }}{{ a.1 }}
+        {% endfor %}
+    </div>
+
+</body>
+</html>
